@@ -1,0 +1,31 @@
+name: CI - Compilar BeatX
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  compilar:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Crear carpeta out
+        run: mkdir -p out
+
+      - name: Compilar proyecto
+        run: javac -d out backend/src/*.java
+
+      - name: Compilación finalizada
+        run: echo "Compilación correcta."
